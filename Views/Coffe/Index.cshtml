@@ -1,0 +1,83 @@
+@model MvcMovie.Models.CoffeHowToTakeViewModel
+
+@{
+    ViewData["Title"] = "Coffe List";
+}
+
+<h1>Lista de Cafés</h1>
+
+<p>
+    <a asp-action="Create">Criar novo</a>
+</p>
+
+<form asp-Controller="Coffe" asp-action="Index" method="get">
+    <p>
+        <select asp-for="CoffeHTT" asp-items="Model.HowToTakes">
+            <option value="">All</option>
+        </select>
+
+
+        Title: <input type="text" asp-for="SearchString"/> 
+        <input type="submit" value="Filtrar"/>
+    </p>
+</form> 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].Intensity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].Aroma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].HowToTake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coffes[0].Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Coffes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intensity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aroma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HowToTake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
